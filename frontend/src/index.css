@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+{/*Navlink is an a tag, active when clicked -> only active one has underline*/}
+a.active hr {
+    display: block;
+}
