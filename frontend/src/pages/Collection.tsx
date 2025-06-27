@@ -57,9 +57,8 @@ const Collection = () => {
       case "high-low":
         productsCopy.sort((a, b) => b.price - a.price); // Sort in place
         break;
-      case "relevant":
       default:
-        // the original order of 'products'. If 'relevant' just means original order,
+        // the original order of 'products'. 'relevant'
         // then no sort is needed here as productsCopy already started from 'products.slice()'.
         break;
     }
