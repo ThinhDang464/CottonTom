@@ -1,12 +1,24 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import { assets } from "../assets/assets";
+import { useLocation } from "react-router-dom";
 
 const SearchBar = () => {
   const { search, setSearch, showSearch, setShowSearch } =
     useContext(ShopContext);
 
-  return showSearch ? (
+  const location = useLocation(); //hide search bar when navigate to diff pages
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    // console.log(location.pathname);
+    if (location.pathname.includes("collection")) {
+      setVisible(true);
+    } else {
+      setVisible(false);
+    }
+  }, [location]);
+  return showSearch && visible ? (
     <div className="border-t bg-gray-50 text-center">
       {/*inline flex make the container flex but not take up whole width only what the child are -> we set width to 3/4 of  parent div here */}
       {/*without items-center -> flex use align items stretch for vertical -> off ratio of image cause it stretch to fill container based on tallest child */}

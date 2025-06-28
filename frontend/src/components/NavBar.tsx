@@ -1,11 +1,19 @@
 import { useContext, useState } from "react";
 import { assets } from "../assets/assets.ts";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext.tsx";
 
 const NavBar = () => {
   const [visible, setVisible] = useState(false);
   const { setShowSearch } = useContext(ShopContext);
+  const navigate = useNavigate(); //initialize navigation for stuff that is not Link or Nav Link
+
+  const handleSearchClick = () => {
+    // set showSearch true and navigate to collection page to browse
+    setShowSearch(true);
+    navigate("/collection");
+  };
+
   return (
     <div className="flex items-center justify-between py-5 font-medium">
       <Link to="/">
@@ -32,9 +40,7 @@ const NavBar = () => {
 
       <div className="flex items-center gap-6">
         <img
-          onClick={() => {
-            setShowSearch(true);
-          }}
+          onClick={handleSearchClick}
           src={assets.search_icon}
           className="w-5 cursor-pointer"
         />
