@@ -5,7 +5,7 @@ import Title from "../components/Title";
 import ProductItem from "../components/ProductItem";
 
 const Collection = () => {
-  const { products } = useContext(ShopContext);
+  const { products, search, showSearch } = useContext(ShopContext);
   const [showFilter, setShowFilter] = useState(false);
   const [filterProducts, setFilterProducts] = useState([]);
   const [category, setCategory] = useState([]);
@@ -37,6 +37,13 @@ const Collection = () => {
     //use JS copy when data can be derived from existing props or state
 
     let productsCopy = products.slice(); //copy products array in this variable, use let cause we will reassign multiple times
+    //search logic
+    if (showSearch && search) {
+      productsCopy = productsCopy.filter(
+        (item) => item.name.toLowerCase().includes(search.toLowerCase()) //search if query search available inproducts name
+      );
+    }
+
     if (category.length > 0) {
       productsCopy = productsCopy.filter((item) =>
         category.includes(item.category)
@@ -68,7 +75,7 @@ const Collection = () => {
 
   useEffect(() => {
     applyFilterAndSort();
-  }, [category, subCategory, sortType]); //whenever these 2 got updated -> execute this func
+  }, [category, subCategory, sortType, search, showSearch]); //whenever these got updated -> execute this func
 
   return (
     <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 border-t pt-8">
