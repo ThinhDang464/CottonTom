@@ -4,7 +4,8 @@ import Title from "./Title";
 import Product from "../pages/Product";
 import ProductItem from "./ProductItem";
 
-const RelatedProducts = ({ category, subCategory }) => {
+//use currenProductID so that related product does not display current product
+const RelatedProducts = ({ category, subCategory, currentProductId }) => {
   const { products } = useContext(ShopContext);
   const [related, setRelated] = useState([]);
 
@@ -17,9 +18,14 @@ const RelatedProducts = ({ category, subCategory }) => {
         (item) => subCategory === item.subCategory
       );
 
+      // Add the filter to exclude the current product
+      productsCopy = productsCopy.filter(
+        (item) => item._id !== currentProductId
+      );
+
       setRelated(productsCopy.slice(0, 5));
     }
-  }, [products]); //whenever products data updated -> need re render
+  }, [products, currentProductId]); //whenever products data updated or there is new CurrentProductId -> need re render
 
   return (
     <div className="my-24">
