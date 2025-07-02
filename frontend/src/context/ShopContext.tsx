@@ -14,6 +14,24 @@ const ShopContextProvider = (props) => {
   const delivery_fee = 10;
   const [search, setSearch] = useState(""); //use search feature across different components
   const [showSearch, setShowSearch] = useState(false);
+  const [cartItems, setCartItems] = useState({}); //keep track cart items
+
+  //when select product n size -> add prod to cart
+  const addToCart = async (itemId, size) => {
+    let cartData = structuredClone(cartItems); //create copy of objects
+
+    if (cartData[itemId]) {
+      if (cartData[itemId][size]) {
+        cartData[itemId][size] += 1;
+      } else {
+        cartData[itemId][size] = 1;
+      }
+    } else {
+      cartData[itemId] = {};
+      cartData[itemId][size] = 1;
+    }
+  };
+
   const value = {
     products,
     currency,
