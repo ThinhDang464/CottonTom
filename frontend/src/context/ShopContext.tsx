@@ -16,20 +16,31 @@ const ShopContextProvider = (props) => {
   const [showSearch, setShowSearch] = useState(false);
   const [cartItems, setCartItems] = useState({}); //keep track cart items
 
-  //when select product n size -> add prod to cart
-  const addToCart = async (itemId, size) => {
-    let cartData = structuredClone(cartItems); //create copy of objects
+  /*Objects in cart items look like this:  
+  {
+    "productId1": { "M": 2, "L": 1 },
+    "productId2": { "S": 1 }
+  }*/
 
+  //when select product n size -> add prod to cart
+  //might interact with database later -> set async function
+  const addToCart = async (itemId, size) => {
+    let cartData = structuredClone(cartItems); //create copy of objects, prevent anti React mutation of state, no muate state directly
+
+    //if product exist in cart
     if (cartData[itemId]) {
+      //if that size for that product exist
       if (cartData[itemId][size]) {
         cartData[itemId][size] += 1;
       } else {
         cartData[itemId][size] = 1;
       }
     } else {
+      //if product does not exist then create an object for it + add size quantity = 1
       cartData[itemId] = {};
       cartData[itemId][size] = 1;
     }
+    setCartItems(cartData);
   };
 
   const value = {
