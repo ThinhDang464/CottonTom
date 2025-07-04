@@ -1,5 +1,7 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { products } from "../assets/assets";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 //store state variables to be used
 
@@ -15,6 +17,7 @@ const ShopContextProvider = (props) => {
   const [search, setSearch] = useState(""); //use search feature across different components
   const [showSearch, setShowSearch] = useState(false);
   const [cartItems, setCartItems] = useState({}); //keep track cart items
+  const navigate = useNavigate();
 
   /*Objects in cart items look like this:  
   {
@@ -25,6 +28,12 @@ const ShopContextProvider = (props) => {
   //when select product n size -> add prod to cart
   //might interact with database later -> set async function
   const addToCart = async (itemId, size) => {
+    //no size selected then warning msg, right now without this block size "" will be sent as arg
+    if (!size) {
+      toast.error("Select Product Size");
+      return; //stop execution of addToCard func or else code below still run
+    }
+
     let cartData = structuredClone(cartItems); //create copy of objects, prevent anti React mutation of state, no muate state directly
 
     //if product exist in cart
@@ -43,6 +52,50 @@ const ShopContextProvider = (props) => {
     setCartItems(cartData);
   };
 
+  const getCartCount = () => {
+    let totalCount = 0;
+    //each product in cartItems
+    for (const items in cartItems) {
+      //each size for that product
+      for (const item in cartItems[items]) {
+        try {
+          //if specific size of item quantity > 0 then get the quantity
+          if (cartItems[items][item] > 0) {
+            totalCount += cartItems[items][item];
+          }
+        } catch (error) {}
+      }
+    }
+
+    return totalCount;
+  };
+
+  //for updating quantity at cart
+  const updateQuantity = async (itemId, size, quantity) => {
+    //copy of carititems
+    let cardData = structuredClone(cartItems);
+    cardData[itemId][size] = quantity; //update quantity of specific item
+    setCartItems(cardData); //new cart Data
+  };
+
+  //get total amount price from cartItems
+  const getCartAmount = () => {
+    let totalAmount = 0;
+    for (const items in cartItems) {
+      let itemInfo = products.find((product) => product._id === items);
+      //find product price calculate based on quantity
+      for (const item in cartItems[items]) {
+        try {
+          //check for > 0 cause when user click delete there might be entry with size: 0
+          if (cartItems[items][item] > 0) {
+            totalAmount += itemInfo.price * cartItems[items][item];
+          }
+        } catch (error) {}
+      }
+    }
+    return totalAmount;
+  };
+
   const value = {
     products,
     currency,
@@ -51,6 +104,12 @@ const ShopContextProvider = (props) => {
     setSearch,
     showSearch,
     setShowSearch,
+    cartItems,
+    addToCart,
+    getCartCount,
+    updateQuantity,
+    getCartAmount,
+    navigate,
   };
 
   return (

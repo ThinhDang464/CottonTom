@@ -5,7 +5,7 @@ import { ShopContext } from "../context/ShopContext.tsx";
 
 const NavBar = () => {
   const [visible, setVisible] = useState(false);
-  const { setShowSearch } = useContext(ShopContext);
+  const { setShowSearch, getCartCount } = useContext(ShopContext);
   const navigate = useNavigate(); //initialize navigation for stuff that is not Link or Nav Link
 
   const handleSearchClick = () => {
@@ -67,7 +67,10 @@ const NavBar = () => {
           />
           {/*Cart text styling negative value push out of boundary of parent*/}
           <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
-            10
+            {/*React automatically re-renders any component that uses context values when the context’s state changes. 
+              this case is getCartCount
+            */}
+            {getCartCount()}
           </p>
         </Link>
         <img

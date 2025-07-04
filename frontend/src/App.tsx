@@ -11,6 +11,7 @@ import Orders from "./pages/Orders";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import SearchBar from "./components/SearchBar";
+import { ToastContainer, toast } from "react-toastify";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
     //main layout is flex col, div min-h-screen make div length (vertical) = window size + flex-1 content take up available space
     // => footer will always at bottom
     <div className="min-h-screen flex flex-col px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
+      <ToastContainer />
       <NavBar />
       <SearchBar />
       <main className="flex-1">
