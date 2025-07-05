@@ -10,14 +10,15 @@ const Login = () => {
         <p className="prata-regular text-3xl">{currentState}</p>
         <hr className="border-none h-[1.5px] w-8 bg-gray-800" />
       </div>
-
       {/*Input Field*/}
-      <input
-        required
-        type="text"
-        className=" px-3 py-2 w-full border border-gray-800"
-        placeholder="Name"
-      ></input>
+      {currentState === "Login" ? null : (
+        <input
+          required
+          type="text"
+          className="px-3 py-2 w-full border border-gray-800"
+          placeholder="Name"
+        ></input>
+      )}
       <input
         required
         type="email"
