@@ -3,6 +3,8 @@ import { useState } from "react";
 const Login = () => {
   const [currentState, setCurrentState] = useState("Sign Up");
 
+  //set as async cause it will deal with databae operation later on
+  const onSubmitHandler = async (event) => {};
   return (
     <form className="flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-14 gap-4 text-gray-800">
       {/*inline flex turn p into inline to have hr next to it */}
@@ -31,6 +33,31 @@ const Login = () => {
         className=" px-3 py-2 w-full border border-gray-800"
         placeholder="Password"
       ></input>
+      <div className="w-full flex justify-between text-sm">
+        <p className="cursor-pointer">Forgot your password?</p>
+        {currentState === "Login" ? (
+          <p
+            onClick={() => {
+              setCurrentState("Sign Up");
+            }}
+            className="cursor-pointer"
+          >
+            Create account
+          </p>
+        ) : (
+          <p
+            onClick={() => {
+              setCurrentState("Login");
+            }}
+            className="cursor-pointer"
+          >
+            Login Here
+          </p>
+        )}
+      </div>
+      <button className="bg-black text-white font-light px-8 py-2 mt-2">
+        {currentState === "Login" ? "Sign In" : "Sign Up"}
+      </button>
     </form>
   );
 };
