@@ -40,7 +40,7 @@ const About = () => {
         <Title text1={"WHY"} text2={"COTTONTOM"} />
       </div>
       <div className="flex flex-col md:flex-row text-sm mb-20">
-        <div className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5">
+        <div className="border border-r-0 px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5">
           <b>Quality Assurance: </b>
           <p className="text-gray-600">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel
@@ -49,7 +49,7 @@ const About = () => {
             dolores numquam, inventore hic.
           </p>
         </div>
-        <div className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5">
+        <div className="border border-r-0 px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5">
           <b>Convenience: </b>
           <p className="text-gray-600">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel
