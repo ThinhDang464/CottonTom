@@ -16,3 +16,9 @@ multer: uploading files = profile pic, product images, etc
 stripe razorpay: payment
 cloudinary: cloud based platform for managing images and vids, after upload using multer -> often use this to send image to cloudinary for storage + delivery via CDN
 */
+
+/*Create basic server*/
+//without type module in package.json we have to use old import: const express = require('express');
+import express from "express";
+import cors from "cors";
+import "dontenv/config";
