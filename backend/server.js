@@ -18,6 +18,9 @@ cloudinary: cloud based platform for managing images and vids, after upload usin
 
 extension:
 thunderclient
+
+Database: MongoDB
+cluster - nodes (servers) working together for scalability
 */
 
 /*Create basic server*/
@@ -25,10 +28,14 @@ thunderclient
 import express from "express";
 import cors from "cors";
 import "dotenv/config";
+import connectDB from "./config/mongodb.js";
+import connectCloudinary from "./config/cloudinary.js";
 
-//App Config - use express create instance of express server
+//App Config - use express create instance of express server, and connect cloudinary storage and MongoDB
 const app = express();
 const port = process.env.PORT || 4000; //if not available then use port 4000
+connectDB();
+connectCloudinary();
 
 //Middleware - request comes into server from frontend will pass thru middleware
 app.use(express.json()); //convert request from frontend from json string to js object
