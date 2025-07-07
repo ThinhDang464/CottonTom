@@ -15,10 +15,29 @@ Funtional Package:
 multer: uploading files = profile pic, product images, etc
 stripe razorpay: payment
 cloudinary: cloud based platform for managing images and vids, after upload using multer -> often use this to send image to cloudinary for storage + delivery via CDN
+
+extension:
+thunderclient
 */
 
 /*Create basic server*/
 //without type module in package.json we have to use old import: const express = require('express');
 import express from "express";
 import cors from "cors";
-import "dontenv/config";
+import "dotenv/config";
+
+//App Config - use express create instance of express server
+const app = express();
+const port = process.env.PORT || 4000; //if not available then use port 4000
+
+//Middleware - request comes into server from frontend will pass thru middleware
+app.use(express.json()); //convert request from frontend from json string to js object
+app.use(cors()); //unlock frontend port, defy allowed ports
+
+//API Endpoints
+//simple route handler
+app.get("/", (req, res) => {
+  res.send("API Working"); //whenever open port 400 display API working
+});
+
+app.listen(port, () => console.log("Server started on PORT : " + port)); //start server, bind express application to a network port -> put in listen state for incoming req
