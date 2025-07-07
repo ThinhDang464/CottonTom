@@ -30,6 +30,7 @@ import cors from "cors";
 import "dotenv/config";
 import connectDB from "./config/mongodb.js";
 import connectCloudinary from "./config/cloudinary.js";
+import userRouter from "./routes/userRoute.js";
 
 //App Config - use express create instance of express server, and connect cloudinary storage and MongoDB
 const app = express();
@@ -38,10 +39,13 @@ connectDB();
 connectCloudinary();
 
 //Middleware - request comes into server from frontend will pass thru middleware
-app.use(express.json()); //convert request from frontend from json string to js object
+app.use(express.json()); //convert request from frontend from json string to js object, for request json() turn json string to js obj, for outgiong res, json() turn js obj into string
 app.use(cors()); //unlock frontend port, defy allowed ports
 
 //API Endpoints
+//Any request that starts with the path /api/user should be handled by the userRouter
+app.use("/api/user", userRouter);
+
 //simple route handler
 app.get("/", (req, res) => {
   res.send("API Working"); //whenever open port 400 display API working
