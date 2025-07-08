@@ -31,6 +31,7 @@ import "dotenv/config";
 import connectDB from "./config/mongodb.js";
 import connectCloudinary from "./config/cloudinary.js";
 import userRouter from "./routes/userRoute.js";
+import productRouter from "./routes/productRoute.js";
 
 //App Config - use express create instance of express server, and connect cloudinary storage and MongoDB
 const app = express();
@@ -45,6 +46,9 @@ app.use(cors()); //unlock frontend port, defy allowed ports
 //API Endpoints
 //Any request that starts with the path /api/user should be handled by the userRouter
 app.use("/api/user", userRouter);
+
+//endpoint handled by productRouter
+app.use("/api/product", productRouter);
 
 //simple route handler
 app.get("/", (req, res) => {
