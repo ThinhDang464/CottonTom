@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema(
   { minimize: false } //need this to prevent mongoose from discard empty object like default of cartData when saving to databae
 );
 
+//userModel represents all users in the database -> it connects application code(operation) to user collection in MongoDB
 const userModel = mongoose.model.user || mongoose.model("user", userSchema);
 
 export default userModel;
