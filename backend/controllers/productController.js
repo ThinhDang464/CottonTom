@@ -18,10 +18,10 @@ const addProduct = async (req, res) => {
 
     //get images from req.files
     //if image avilable then access the image, if not const = undefined
-    const image1 = req.files.imag1 && req.files.image1[0]; //image1 is an array get the first element, maxCOunt = 1 makes sure array only have 1 element
-    const image2 = req.files.imag2 && req.files.image2[0];
-    const image3 = req.files.imag3 && req.files.image3[0];
-    const image4 = req.files.imag4 && req.files.image4[0];
+    const image1 = req.files.image1 && req.files.image1[0]; //image1 is an array get the first element, maxCOunt = 1 makes sure array only have 1 element
+    const image2 = req.files.image2 && req.files.image2[0];
+    const image3 = req.files.image3 && req.files.image3[0];
+    const image4 = req.files.image4 && req.files.image4[0];
 
     const images = [image1, image2, image3, image4].filter(
       (item) => item !== undefined
@@ -55,6 +55,8 @@ const addProduct = async (req, res) => {
         return result.secure_url;
       })
     );
+
+    console.log(imagesUrl);
 
     // console.log(
     //   name,
@@ -90,7 +92,15 @@ const addProduct = async (req, res) => {
   }
 };
 
-const listProduct = async (req, res) => {};
+const listProduct = async (req, res) => {
+  try {
+    const products = await productModel.find({});
+    res.json({ sucess: true, products });
+  } catch (error) {
+    console.log(eror);
+    res.json({ success: false, message: error.message });
+  }
+};
 
 const removeProduct = async (req, res) => {};
 
