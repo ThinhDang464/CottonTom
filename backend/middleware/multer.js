@@ -10,6 +10,6 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage });
+const upload = multer({ storage }); //internal multer will create a function like adminAuth
 
 export default upload;

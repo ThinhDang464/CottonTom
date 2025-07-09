@@ -6,6 +6,7 @@ import {
   singleProduct,
 } from "../controllers/productController.js";
 import upload from "../middleware/multer.js";
+import adminAuth from "../middleware/adminAuth.js";
 
 const productRouter = express.Router();
 
@@ -22,6 +23,7 @@ const productRouter = express.Router();
 //addProduct in controller should take req.file upload to CLoudinary and retrieve permanent url
 productRouter.post(
   "/add",
+  adminAuth, //adminAuth runs before multer
   upload.fields([
     { name: "image1", maxCount: 1 },
     { name: "image2", maxCount: 1 },
@@ -30,7 +32,7 @@ productRouter.post(
   ]),
   addProduct
 ); //need upload middleware to facilitate image upload multipart
-productRouter.post("/remove", removeProduct);
+productRouter.post("/remove", adminAuth, removeProduct);
 productRouter.post("/single", singleProduct);
 productRouter.get("/list", listProduct);
 
