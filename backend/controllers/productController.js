@@ -16,10 +16,11 @@ const addProduct = async (req, res) => {
     } = req.body;
 
     //get images from req.files
-    const image1 = req.files.image1[0]; //image1 is an array get the first element
-    const image2 = req.files.image2[0];
-    const image3 = req.files.image3[0];
-    const image4 = req.files.image4[0];
+    //if image avilable then access the image, if not const = undefined
+    const image1 = req.files.imag1 && req.files.image1[0]; //image1 is an array get the first element, maxCOunt = 1 makes sure array only have 1 element
+    const image2 = req.files.imag2 && req.files.image2[0];
+    const image3 = req.files.imag3 && req.files.image3[0];
+    const image4 = req.files.imag4 && req.files.image4[0];
 
     console.log(
       name,
@@ -31,7 +32,7 @@ const addProduct = async (req, res) => {
       bestseller
     );
 
-    console.log(image1, image2, image3, image4);
+    console.log(image1, image2, image3, image4); // {fieldname:image 1, originalname:,encoding, etc} an object has info about the file uploaded
 
     res.json({});
   } catch (error) {
