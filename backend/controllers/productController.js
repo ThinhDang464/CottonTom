@@ -92,12 +92,13 @@ const addProduct = async (req, res) => {
   }
 };
 
+//list all products
 const listProduct = async (req, res) => {
   try {
     const products = await productModel.find({});
     res.json({ sucess: true, products });
   } catch (error) {
-    console.log(eror);
+    console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
@@ -107,12 +108,22 @@ const removeProduct = async (req, res) => {
     await productModel.findByIdAndDelete(req.body.id); //send id thru req body frontend
     res.json({ success: true, message: "Product Removed" });
   } catch (error) {
-    console.log(eror);
+    console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
 
 //single product info
-const singleProduct = async (req, res) => {};
+//use post because need a req.body to send id, get dont normally have body
+const singleProduct = async (req, res) => {
+  try {
+    const { productID } = req.body;
+    const product = await productModel.findById(productID);
+    res.json({ sucess: true, product });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
 
 export { addProduct, listProduct, removeProduct, singleProduct };
