@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true }, //one emai used
     password: { type: String, required: true },
     cartData: { type: Object, default: {} }, //new user, cart empty obj
+    role: { type: String, default: "user" }, //normal user and admin
   },
   { minimize: false } //need this to prevent mongoose from discard empty object like default of cartData when saving to databae
 );

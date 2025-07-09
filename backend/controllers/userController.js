@@ -99,7 +99,41 @@ const registerUser = async (req, res) => {
   }
 };
 
-//Route for admin login
-const adminLogin = async (req, res) => {};
+//Route for admin login + admin function for protected route + generate token for admin user
+const adminLogin = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    //find user with that email
+    const user = await userModel.findOne({ email });
+
+    //check if user exist
+    if (!user) {
+      return res.json({ success: false, message: "User does not exist" });
+    }
+
+    //compare password provided with database password (hashed)
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.json({ success: false, message: "Invalid Credentials" });
+    }
+
+    //check role
+    if (user.role !== "admin") {
+      return res.json({
+        success: false,
+        message: "Not authorized for admin access",
+      });
+    }
+
+    //if all check pass -> generate token
+    const token = createToken(user._id);
+    res.json({ success: true, token, message: "Admin Login Successful" });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
 
 export { loginUser, registerUser, adminLogin };
