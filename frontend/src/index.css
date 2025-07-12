@@ -1,9 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&display=swap");
 @import "tailwindcss";
 
- {
-  /*Navlink is an a tag, active when clicked -> only active one has underline*/
-}
+/*Navlink is an a tag, active when clicked -> only active one has underline*/
+
 a.active hr {
   display: block;
 }
@@ -11,6 +10,7 @@ a.active hr {
 * {
   font-family: Outfit;
 }
+
 .prata-regular {
   font-family: "Prata", serif;
   font-weight: 400;
