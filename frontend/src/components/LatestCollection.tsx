@@ -11,7 +11,7 @@ const LatestCollection = () => {
   //whenever component loaded -> load 10 products from products data
   useEffect(() => {
     setLatestProduct(products.slice(0, 10)); //slice creates new smaller array containes first 10 items
-  }, []); //once
+  }, [products]); //update products UI when products array changes
 
   return (
     <div className="my-10">

@@ -75,7 +75,7 @@ const Collection = () => {
 
   useEffect(() => {
     applyFilterAndSort();
-  }, [category, subCategory, sortType, search, showSearch]); //whenever these got updated -> execute this func
+  }, [category, subCategory, sortType, search, showSearch, products]); //whenever these got updated -> execute this func
 
   return (
     <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 border-t pt-8">

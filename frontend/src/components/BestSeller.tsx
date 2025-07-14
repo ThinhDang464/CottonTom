@@ -10,7 +10,7 @@ const BestSeller = () => {
   useEffect(() => {
     const bestProducts = products.filter((item) => item.bestseller); //keep item that have besSeller true in new array
     setBestSeller(bestProducts.slice(0, 5)); //only show 5
-  }, []);
+  }, [products]); //whenever products updated shud displayed update
   return (
     <div className="my-10">
       <div className="text-center text-3xl py-8">
