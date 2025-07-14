@@ -20,6 +20,12 @@ const Add = ({ token }) => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    // --- VALIDATION BLOCK NO IMAGES ---
+    if (!image1 && !image2 && !image3 && !image4) {
+      toast.error("Please upload at least one product image.");
+      return; // Stop the onSubmitHandler function from proceeding
+    }
+    // --- END OF VALIDATION ---
     try {
       const formData = new FormData(); //built in browser API need when include files when send to url backend
       formData.append("name", name);
