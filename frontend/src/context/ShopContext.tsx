@@ -19,6 +19,7 @@ const ShopContextProvider = (props) => {
   const [showSearch, setShowSearch] = useState(false);
   const [cartItems, setCartItems] = useState({}); //keep track cart items
   const [products, setProducts] = useState([]);
+  const [token, setToken] = useState(""); //token for login
   const navigate = useNavigate();
 
   /*Objects in cart items look like this:  
@@ -117,6 +118,13 @@ const ShopContextProvider = (props) => {
   useEffect(() => {
     getProductsData();
   }, []);
+
+  //reload website clears state token but not local storage token, used to keep user signed in
+  useEffect(() => {
+    if (!token && localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+    }
+  }, []);
   const value = {
     products,
     currency,
@@ -132,6 +140,8 @@ const ShopContextProvider = (props) => {
     getCartAmount,
     navigate,
     backendUrl,
+    token,
+    setToken,
   };
 
   return (
