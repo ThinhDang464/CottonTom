@@ -32,6 +32,7 @@ import connectDB from "./config/mongodb.js";
 import connectCloudinary from "./config/cloudinary.js";
 import userRouter from "./routes/userRoute.js";
 import productRouter from "./routes/productRoute.js";
+import cartRouter from "./routes/cartRoute.js";
 
 //App Config - use express create instance of express server, and connect cloudinary storage and MongoDB
 const app = express();
@@ -43,12 +44,15 @@ connectCloudinary();
 app.use(express.json()); //convert request from frontend from json string to js object, for request json() turn json string to js obj, for outgiong res, json() turn js obj into string
 app.use(cors()); //unlock frontend port, defy allowed ports
 
-//API Endpoints
+//-----------------API Endpoints------------------------
 //Any request that starts with the path /api/user should be handled by the userRouter
 app.use("/api/user", userRouter);
 
 //endpoint handled by productRouter
 app.use("/api/product", productRouter);
+
+//endpoint handled by cartROuter
+app.use("/api/cart", cartRouter);
 
 //simple route handler
 app.get("/", (req, res) => {
