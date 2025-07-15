@@ -4,13 +4,11 @@ import authUser from "../middleware/auth.js";
 import {
   placeOrder,
   placeOrderRazorpay,
-  placeOrderRazorpay,
   userOrders,
   updateStatus,
   allOrders,
   placeOrderStripe,
 } from "../controllers/orderController.js";
-import adminAuth from "../middleware/adminAuth.js";
 
 const orderRouter = express.Router();
 
