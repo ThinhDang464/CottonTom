@@ -33,6 +33,7 @@ import connectCloudinary from "./config/cloudinary.js";
 import userRouter from "./routes/userRoute.js";
 import productRouter from "./routes/productRoute.js";
 import cartRouter from "./routes/cartRoute.js";
+import orderRouter from "./routes/orderRoute.js";
 
 //App Config - use express create instance of express server, and connect cloudinary storage and MongoDB
 const app = express();
@@ -53,6 +54,9 @@ app.use("/api/product", productRouter);
 
 //endpoint handled by cartROuter
 app.use("/api/cart", cartRouter);
+
+//endpoint by orderRouter
+app.use("/api/order", orderRouter);
 
 //simple route handler
 app.get("/", (req, res) => {
