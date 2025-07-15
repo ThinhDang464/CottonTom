@@ -13,18 +13,23 @@ const Cart = () => {
   const [cartData, setCartData] = useState([]);
 
   useEffect(() => {
-    //products data amd cartdata combiens together incartData
-    const tempData = [];
-    for (const items in cartItems) {
-      for (const item in cartItems[items]) {
-        if (cartItems[items][item] > 0) {
-          tempData.push({
-            _id: items,
-            size: item,
-            quantity: cartItems[items][item],
-          });
+    //cartItems and products are fetched and set asynchronously, we need guard like products.length > 0 and dependency
+    //to make this page re-render when products, and cartItems is finish updated
+    //cartItems can be finished first and setCartData set new cartData but products might not be
+    //finished to rendering below with html is error -> make sure only setcartData when products is finshed loading
+    if (products.length > 0) {
+      //products data amd cartdata combiens together incartData
+      const tempData = [];
+      for (const items in cartItems) {
+        for (const item in cartItems[items]) {
+          if (cartItems[items][item] > 0) {
+            tempData.push({
+              _id: items,
+              size: item,
+              quantity: cartItems[items][item],
+            });
 
-          /* 
+            /* 
           sample data
           [
                 { _id: "aaaaa", size: "M", quantity: 2 }, // Product "aaaaa", size M
@@ -32,11 +37,12 @@ const Cart = () => {
                 { _id: "bbbbb", size: "S", quantity: 1 }  // Product "bbbbb", size S
               ]
           */
+          }
         }
       }
+      setCartData(tempData);
     }
-    setCartData(tempData);
-  }, [cartItems]);
+  }, [cartItems, products]);
 
   return (
     <div className="border-t pt-14">
