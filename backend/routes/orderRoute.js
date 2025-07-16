@@ -3,7 +3,6 @@ import adminAuth from "../middleware/adminAuth.js";
 import authUser from "../middleware/auth.js";
 import {
   placeOrder,
-  placeOrderRazorpay,
   userOrders,
   updateStatus,
   allOrders,
