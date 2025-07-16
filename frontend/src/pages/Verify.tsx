@@ -4,6 +4,8 @@ import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
+//Should use webhook for industry standarrd verification
+//This verify method is a simplify version
 const Verify = () => {
   const { navigate, token, setCartItems, backendUrl } = useContext(ShopContext);
   const [searchParam, setSearchParam] = useSearchParams();
