@@ -8,6 +8,7 @@ import {
   updateStatus,
   allOrders,
   placeOrderStripe,
+  verifyStripe,
 } from "../controllers/orderController.js";
 
 const orderRouter = express.Router();
@@ -23,5 +24,8 @@ orderRouter.post("/razorpay", authUser, placeOrderRazorpay);
 
 //user features
 orderRouter.post("/userorders", authUser, userOrders);
+
+//verify payment
+orderRouter.post("/verifyStripe", authUser, verifyStripe); //success_url and cancel_url of stripe will call this api
 
 export default orderRouter;

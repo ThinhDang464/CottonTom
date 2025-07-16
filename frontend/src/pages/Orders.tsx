@@ -94,7 +94,7 @@ const Orders = () => {
               </div>
               <button
                 onClick={loadOrderData} //this will trigger re render if admin update order status because setOrderData change state variable
-                className="border px-4 py-2 text-sm font-medium rounded-sm"
+                className="border px-4 py-2 text-sm font-medium rounded-sm cursor-pointer"
               >
                 Track Order
               </button>
