@@ -20,7 +20,6 @@ orderRouter.post("/status", adminAuth, updateStatus);
 //payment features
 orderRouter.post("/place", authUser, placeOrder); //need token in da header when hitting this api
 orderRouter.post("/stripe", authUser, placeOrderStripe);
-orderRouter.post("/razorpay", authUser, placeOrderRazorpay);
 
 //user features
 orderRouter.post("/userorders", authUser, userOrders);

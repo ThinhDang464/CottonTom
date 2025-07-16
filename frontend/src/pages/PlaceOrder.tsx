@@ -233,19 +233,7 @@ const PlaceOrder = () => {
               ></p>
               <img className="h-5 mx-4" src={assets.stripe_logo} alt="" />
             </div>
-            <div
-              onClick={() => {
-                setMethod("razor");
-              }}
-              className="flex items-center gap-2 border p-2 px-3 cursor-pointer"
-            >
-              <p
-                className={`${
-                  method === "razor" ? "bg-green-400" : ""
-                } min-w-3.5 h-3.5 border rounded-full`}
-              ></p>
-              <img className="h-5 mx-4" src={assets.razorpay_logo} alt="" />
-            </div>
+
             <div
               onClick={() => {
                 setMethod("cod");
