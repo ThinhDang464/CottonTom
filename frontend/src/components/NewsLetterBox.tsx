@@ -9,7 +9,7 @@ const NewsLetterBox = () => {
         Subscribe now & get 15% off
       </p>
       <p className="text-gray-400 mt-3">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi atque
+        Never miss a drop. Get the best of CottonTom, straight to your inbox.
       </p>
       <form
         onSubmit={onSubmitHandler} //onsubmit send event as first argument

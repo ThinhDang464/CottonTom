@@ -8,8 +8,8 @@ const Footer = () => {
         <div>
           <img src={assets.logo} className="mb-5 w-32" />
           <p className="w-full md:w-2/3 text-gray-600">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum dicta
-            similique necessitatibus cupiditate aliquam esse repellat d
+            Discover exceptionally soft and durable apparel designed for modern
+            living. We believe in quality you can feel, one thread at a time.
           </p>
         </div>
 
