@@ -5,12 +5,10 @@ import axios from "axios";
 
 //store state variables to be used
 
-// @ts-ignore
 export const ShopContext = createContext();
 
 //using context can access props ike products in every component
 
-// @ts-ignore
 const ShopContextProvider = (props) => {
   const currency = "$";
   const delivery_fee = 10;
@@ -22,7 +20,7 @@ const ShopContextProvider = (props) => {
   const [token, setToken] = useState(""); //token for login
   const navigate = useNavigate();
 
-  /*Objects in cart items look like this:  
+  /*Objects in cart items look like this:
   {
     "productId1": { "M": 2, "L": 1 },
     "productId2": { "S": 1 }
