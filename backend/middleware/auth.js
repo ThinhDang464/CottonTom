@@ -12,7 +12,7 @@ const authUser = async (req, res, next) => {
   try {
     const token_decode = jwt.verify(token, process.env.JWT_SECRET);
     //modify the request body to have userID instead of token now, for api call to use userID
-    req.body.userId = token_decode.id; //userId must be sent from frontend, id is the object we named in userController to be user id
+    req.body.userId = token_decode.id; //// <- userId is attached here after decoding token
     next(); //pass back control
   } catch (error) {
     console.log(error);
